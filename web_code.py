@@ -6,29 +6,17 @@ import seaborn as sns
 import plotly.express as px
 from wordcloud import WordCloud
 
-# ============Initialize the page===========
+# ============ Initialize the page ===========
 st.set_page_config(layout="wide", page_title="Alexandria Weather Dashboard", page_icon="🌤️")
 
-# ======== Header Section with Image ========
-col1, col2 = st.columns([1, 3])
-with col1:
-    try:
-        st.image(r"C:\Users\ALYOSER\Desktop\6464646.jpg",
-                 width=350,
-                 caption="Alexandria Weather")
-    except FileNotFoundError:
-        st.warning("Image not found! Using placeholder")
-        st.image("https://via.placeholder.com/200x100?text=Weather+Image", width=350)
-
-with col2:
-    st.title("🌤️ Alexandria Weather Dashboard")
-    st.markdown("""
+# ======== Header Section ========
+st.title("🌤️ Alexandria Weather Dashboard")
+st.markdown("""
     <div style="text-align: right;">
     <h3>Historical Weather Data Analysis</h3>
     <p>Interactive visualization of weather patterns</p>
     </div>
     """, unsafe_allow_html=True)
-
 
 # ======== Data Loading ========
 @st.cache_data
