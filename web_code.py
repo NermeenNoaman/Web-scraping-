@@ -22,14 +22,11 @@ st.markdown("""
 @st.cache_data
 def load_data():
     try:
-        # Connect to MongoDB Atlas
-        client = MongoClient(
-            "mongodb+srv://nermeen12802351:PPnHFrtzLU0mQvpm@cluster0.dilryw6.mongodb.net/?retryWrites=true&w=majority"
-        )
-
-        # Access database and collection
-        db = client["webscrops_data"]   # اسم الداتا بيز
-        collection = db["webscrops_data"]  # اسم الكولكشن
+       try:
+        # Connect to MongoDB Atlas using secrets from Streamlit
+        client = MongoClient(st.secrets["MONGO_URI"])
+        db = client[st.secrets["DB_NAME"]]
+        collection = db[st.secrets["COLLECTION_NAME"]]
 
         # Load data from MongoDB
         data = list(collection.find())
