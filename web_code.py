@@ -43,7 +43,7 @@ def load_data():
 
         return df
 
-    except Exception as e:
+      except Exception as e:
         st.error(f"Data loading error: {e}")
         return pd.DataFrame()
 
