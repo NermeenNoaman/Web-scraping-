@@ -21,7 +21,7 @@ st.markdown("""
 # ======== Data Loading ========
 @st.cache_data
 def load_data():
-       try:
+      try:
         # Connect to MongoDB Atlas using secrets from Streamlit
         client = MongoClient(st.secrets["MONGO_URI"])
         db = client[st.secrets["DB_NAME"]]
@@ -49,6 +49,7 @@ def load_data():
 
 # Load the data
 df = load_data()
+
 
 # ======== Data Visualizations ========
 if not df.empty:
