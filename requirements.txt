@@ -1,0 +1,7 @@
+streamlit
+pandas
+pymongo
+matplotlib.pyplot 
+seaborn
+plotly.express
+wordcloud
