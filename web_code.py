@@ -22,29 +22,20 @@ st.markdown("""
 @st.cache_data
 def load_data():
     try:
-        # 1. Read CSV file
-        file_path = r"C:\Users\ALYOSER\Desktop\weather.csv"
-        df = pd.read_csv(file_path)
-
-        # 2. Connect to MongoDB
+        # Connect to MongoDB
         client = MongoClient("mongodb://localhost:27017/")
         db = client["local"]
         collection = db["webscrops_data"]
 
-        # 3. Insert data if collection is empty
-        if collection.count_documents({}) == 0:
-            data = df.to_dict("records")
-            collection.insert_many(data)
-
-        # 4. Load data from MongoDB
+        # Load data from MongoDB
         data = list(collection.find())
         df = pd.DataFrame(data)
 
-        # Data cleaning
+        # Clean DataFrame
         if "_id" in df.columns:
             df.drop(columns=["_id"], inplace=True)
 
-        # Extract month from date
+        # Extract month and month name if date column exists
         if 'date' in df.columns:
             df['date'] = pd.to_datetime(df['date'])
             df['Month'] = df['date'].dt.month
@@ -56,7 +47,7 @@ def load_data():
         st.error(f"Data loading error: {e}")
         return pd.DataFrame()
 
-
+# Load the data
 df = load_data()
 
 # ======== Data Visualizations ========
