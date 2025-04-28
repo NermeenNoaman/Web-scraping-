@@ -31,6 +31,10 @@ def load_data():
         data = list(collection.find())
         df = pd.DataFrame(data)
 
+        # Clean DataFrame
+        if "_id" in df.columns:
+            df.drop(columns=["_id"], inplace=True)
+
         # Handle date columns
         if 'Date' in df.columns:
             df['Date'] = pd.to_datetime(df['Date'])
